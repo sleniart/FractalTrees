@@ -2,9 +2,9 @@ var count = 1;
 var len = 150;
 
 
-var sets = [                                             //zbior indywidualnych zasad dla kazdego ksztaltu
+var sets = [                                             //idividual rules for each nature similar object
     {
-        axiom: "X",                                    //deklaracja axiomatów i zbioru zasad
+        axiom: "X",                                   
         angle: 20,
         rules: [
             {
@@ -72,18 +72,18 @@ var sets = [                                             //zbior indywidualnych 
     }
 ];
 
-var sentence = sets[count].axiom;                                             //przypisanie axiomatu do nowej zmiennej
+var sentence = sets[count].axiom;                                             //assign axiom for new sentence
 
 function generate() {
     len *= 0.56;
     var nextSentence = "";
-    for (var i = 0; i < sentence.length; i++) {                              //petla sprawdzajaca kazda kolejna litere zdania
+    for (var i = 0; i < sentence.length; i++) {                              //check every next char at the sentence 
         var current = sentence.charAt(i)
-        var found = false;                                                  //zapobieganie sprawdzania tego samego ciągle od nowa
+        var found = false;                                                  //prevent from checking it from the begining
         for (var j = 0; j < sets[count].rules.length; j++) {
-            if (current === sets[count].rules[j].a) {                      //jeżeli spełniony jest warunek zasad
+            if (current === sets[count].rules[j].a) {                      //if declared rule is fulfilled
                 found = true;
-                nextSentence += sets[count].rules[j].b;                     //to do zdania zostaje przypisana wartosc mu odpowiadajaca
+                nextSentence += sets[count].rules[j].b;                     //then its add to sentence
                 break;
             }
         }
@@ -92,43 +92,43 @@ function generate() {
         }
     }
     sentence = nextSentence;
-    turtle();                                                                //wywołanie funkcji rysujacej
+    turtle();                                                                //calling draw function
 }
 
-function turtle(){                                                             //funkcja rysujaca
+function turtle(){                                                             
     background(51);
     resetMatrix();
     translate(width/2, height);
     stroke(255);
     for (var i = 0; i < sentence.length; i++){
         var current = sentence.charAt(i);
-        if (current === "F"){                                                  //F jako instrukcja "move forward by line length drwaing a line" dla naszego "żółwia"
+        if (current === "F"){                                                  //F stands for "move forward by line length drwaing a line"
             line(0, 0, 0, -len);
             translate(0, -len);
-        } else if (current === "+") {                                          //+ jako obrót w jedną stronę
+        } else if (current === "+") {                                          //+ rotate 
             rotate (radians(sets[count].angle));
 
-        } else if (current === "-") {                                          // a - jako obrót w drugą
+        } else if (current === "-") {                                          //- rotate other side
             rotate (radians(-sets[count].angle));
-        } else if (current === "["){                                           //znane już "zapisanie" obecnego miejsca "żółwia"
+        } else if (current === "["){                                           //"save" where we are atm
             push();
-        } else if (current === "]"){                                            //wczytanie jego pozycji
+        } else if (current === "]"){                                            //"load" saved position
             pop();
         }
     }
 }
 
-function nextRule(){                                                            //metoda odpowiadająca za zmianę zasad
+function nextRule(){                                                            //changing rules
     if (count < sets.length - 1){
         count ++;
     }
     else {
-        count = 0;                                                                //"zapętlenie" zmiany zasad
+        count = 0;                                                                //looping moving between rules
     }
-    background(51);
-    translate(width/2, height);                                                 //powrót "żółwia" do pierwotnej pozycji
-    sentence = sets[count].axiom;                                               //ustalenie nowego axiomatu
-    len = 150;                                                                   //powrót do pierwotnej długości
+    background(51);								//reset background
+    translate(width/2, height);                                                 //translate to original position
+    sentence = sets[count].axiom;                                               //set new axiom
+    len = 150;                                                                   //reset to original length 
 }
 
 function previousRule(){
@@ -136,7 +136,7 @@ function previousRule(){
         count--;
     }
     else {
-        count = sets.length - 1; // "zapętlenie" zmiany zasad
+        count = sets.length - 1; 
     }
     background(51);
     translate(width/2, height);
@@ -145,7 +145,7 @@ function previousRule(){
 
 }
 
-function save() { //funkcja zapisująca obraz
+function save() {
     save();
 }
 
@@ -153,11 +153,11 @@ function setup() {
     var canvas = createCanvas(700, 700);
     background(51);
     turtle();
-    var buttonPrev = createButton("Poprzedni zbiór zasad"); //utworzenie przycisków
-    var button = createButton("Utwórz kolejną generację gałęzi");
-    var buttonNext = createButton("Następny zbiór zasad");
-    var buttonSave = createButton("Zapisz obrazek");
-    button.mousePressed(generate); //przypisanie akcji do każdego z przycisków
+    var buttonPrev = createButton("Previous rule");
+    var button = createButton("Create next generation of branches");
+    var buttonNext = createButton("Next rule");
+    var buttonSave = createButton("Save");
+    button.mousePressed(generate);
     buttonPrev.mousePressed(previousRule);
     buttonNext.mousePressed(nextRule);
     buttonSave.mousePressed(save);

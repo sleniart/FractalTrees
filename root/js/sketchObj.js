@@ -1,6 +1,6 @@
-var tree = [];                                                       // Zmienne globalne przechowujące gałęzie drzewa jako obiekty.
+var tree = [];                                                       //Global var to keep branch as an object
 var leaves = [];
-var count = 0;                                                      // Licznik umożliwiający kontrolowanie ilości gąłęzi/kliknięc myszy.
+var count = 0;                                                      // Helping counter
 
 function setup() {
     var canvas = createCanvas(700, 700);
@@ -8,29 +8,29 @@ function setup() {
     var b = createVector(width/2, height - 200);
     var root = new Branch(a, b);
     tree[0] = root;
-    var buttonGenerate = createButton("Kliknij aby wygerenrować kolejne gałęzie");
-    var buttonSave = createButton("Zapisz obrazek");
+    var buttonGenerate = createButton("Click to generate");
+    var buttonSave = createButton("Save");
     buttonGenerate.mousePressed(generate);
     buttonSave.mousePressed(save);
     canvas.parent(canvasObj);
     buttonGenerate.parent(buttonObj);
     buttonSave.parent(buttonObj);
 }
-function generate(){                                                  //Funkcja tworząca następne gałęzie przy kliknięciu myszy.
-    for (var i = tree.length - 1; i >= 0; i--){                      //Tablicę gałęzi sprawdzamy "od tyłu" aby nie doszło do nieskończonej
-        if (!tree[i].finished) {                                     // Zmienna finished zapobieda tworzeniu po raz kolejny istniejących juz gałęzi
-            tree.push(tree[i].branchA());                            // Zmienna finished zapobieda tworzeniu po raz kolejny istniejących juz gałęzi
+function generate(){                                                  //creating next level of branches each mouse click
+    for (var i = tree.length - 1; i >= 0; i--){                      //we check array from the end to prevent infinite loop
+        if (!tree[i].finished) {                                     
+            tree.push(tree[i].branchA());                            
             tree.push(tree[i].branchB());
         }
-        tree[i].finished = true;
+        tree[i].finished = true;			          
     }
     count++;
 
     if (count % 3 === 0){
         for (var i = 0; i < tree.length; i++){
             if(!tree[i].finished){
-                var leaf = tree[i].end.copy();                        //Tworzenie współrzędnych liści na 3 gałęzi
-                leaves.push(leaf);                                   // przezkopiowanie wspołrzędnej końcowej tej gałęzi oraz dodanie ich do tablicy.
+                var leaf = tree[i].end.copy();                        //creating leaves at the 3rd gen
+                leaves.push(leaf);                                   // copying end of branch coords to an array
             }
         }
     }
@@ -39,17 +39,17 @@ function generate(){                                                  //Funkcja 
 function draw() {
     background('#323232');
     for(var i = 0; i < tree.length; i++){
-        tree[i].show();                                             //Wyświetlenie naszego drzewa na "płótnie".
+        tree[i].show();                                             //ispaly
     }
     for(var i = 0; i < leaves.length; i++){
         fill(255, 0, 100, 200);
         noStroke();
         ellipse(leaves[i].x, leaves[i].y, 10, 10);
-        leaves[i].y += random(1, 5);                                 //Spadające liście.
+        leaves[i].y += random(1, 5);                                 //falling leaves
         leaves[i].x += random(-2, 2);
     }
 }
 
-function save(){                                                        //funkcja do zapisania obrazu
+function save(){                                                       
     save();
 }
