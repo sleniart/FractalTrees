@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<head>
+	<meta charset="utf-8" />
+	<title>Generator drzew fraktalnych</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<link rel="stylesheet"  href="../css/layout1.css"/>
+	<script src="../../p5.min.js"></script>
+	<script src="../../addons/p5.dom.min.js"></script>
+	<script src="../../addons/p5.sound.min.js"></script>
+	<script src="../js/sketchLsystem.js"></script>
+</head>
+	
+<body>
+	<div id="container">
+	
+		<div id="logo"> 
+			<h1>Generator drzew fraktalnych</h1>
+		</div>
+		
+		<div id="nav">
+			<div class="option">
+			<a href="../index.html" class="optionlink">Strona główna</a>
+			</div>
+			<div class="option">
+			<a href="rekurencja.html" class="optionlink">Metoda rekurencji</a>
+			</div>
+			<div class="option">
+			<a href="obiektowo.html" class="optionlink">Metoda tworzenia obiektów</a>
+			</div>
+			<div class="option">
+			<a href="lsystem.html" class="optionlink">Metoda wykorzystująca L-System</a>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		
+		<div id="content">
+		<div class="title">Metoda wykorzystująca L-System</div>
+			<p>L-System (system Lindenmayera) to zestaw reguł produkcji gramatyki formalnej służący do tworzenia graficznych tworów o budowie fraktalnej. L-Systemy są gramatykami, w których produkcje stosuje się iteracyjnie od stanu początkowego przez założoną liczbę powtórzeń.
+			</p>
+			<p>Mniej formalnie cały system polega na tym, że:
+			<ul>
+				<li>Mamy wyraz początkowy (axiom)</li>
+				<li>Mamy zestaw reguł opisujących co ma dziać się z axiomem</li>
+				<li>Tworzymy kolejne generacje gramatycznych zdań</li>
+				<li>Zamieniamy zdania gramatyczne na rozkazy do rysowania (znany wszystkim rysujący żółwik)</li>
+			</ul>
+			</p>
+			<p>
+				<img src="../img/lsgif.gif" style="float: right"/>
+				GIF przedstawia kolejne generacje zdania zgodne z jakimś zestawem reguł je opisującym.
+			</p>
+		</div>
+
+		<div id="canvasLs"></div>
+		<div id="buttonLs"></div>
+
+	</div>
+</body>
+</html>
