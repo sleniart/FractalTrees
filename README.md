@@ -14,5 +14,5 @@ Object method: generating next branches you can see "leaves" falling.
 
 L-System: with buttons you can walk through different rules of generating nature similar object
 
-"Zapisz Obrazek" button will simply download what currently is in the canvas. 
+"Save" button will simply download what currently is in the canvas. 
 
