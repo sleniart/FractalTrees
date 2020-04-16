@@ -1,5 +1,5 @@
 # FractalTrees
-Fractal tree generator uses three different ways to generate fractal tree:
+Fractal trees generator uses three different ways to generate fractal trees:
 
 * Recursion
 * Object method
